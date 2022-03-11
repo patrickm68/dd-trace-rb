@@ -282,7 +282,7 @@ module Datadog
 
           def build_profiler_collectors(settings, old_recorder, trace_identifiers_helper)
             [
-              Profiling::Collectors::Stack.new(
+              Profiling::Collectors::OldStack.new(
                 old_recorder,
                 trace_identifiers_helper: trace_identifiers_helper,
                 max_frames: settings.profiling.advanced.max_frames
