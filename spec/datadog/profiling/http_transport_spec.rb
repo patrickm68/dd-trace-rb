@@ -1,9 +1,7 @@
 # typed: ignore
 
 require 'datadog/profiling/spec_helper'
-
 require 'datadog/profiling/http_transport'
-require 'datadog/profiling'
 
 require 'webrick'
 require 'socket'

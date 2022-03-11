@@ -4,6 +4,7 @@
 
 // Each class/module here is implemented in their separate file
 void http_transport_init(VALUE profiling_module);
+void stack_recorder_init(VALUE profiling_module);
 
 static VALUE native_working_p(VALUE self);
 
@@ -18,6 +19,7 @@ void Init_ddtrace_profiling_native_extension(void) {
   rb_define_singleton_method(native_extension_module, "clock_id_for", clock_id_for, 1); // from clock_id.h
 
   http_transport_init(profiling_module);
+  stack_recorder_init(profiling_module);
 }
 
 static VALUE native_working_p(VALUE self) {
