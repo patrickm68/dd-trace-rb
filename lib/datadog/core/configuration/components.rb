@@ -303,7 +303,7 @@ module Datadog
           end
 
           def build_profiler_scheduler(_settings, exporter, transport)
-            Profiling::Scheduler.new(recorder: exporter, transport: transport)
+            Profiling::Scheduler.new(exporter: exporter, transport: transport)
           end
         end
 
