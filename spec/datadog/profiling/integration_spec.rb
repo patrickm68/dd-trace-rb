@@ -89,7 +89,7 @@ RSpec.describe 'profiling integration test' do
         last_flush_time: Time.now.utc - 5
       )
     end
-    let(:recorder) { Datadog::Profiling::Recorder.new(pprof_collector: old_recorder, code_provenance_collector: nil) }
+    let(:exporter) { Datadog::Profiling::Exporter.new(pprof_collector: old_recorder, code_provenance_collector: nil) }
     let(:collector) do
       Datadog::Profiling::Collectors::Stack.new(
         old_recorder,
@@ -101,15 +101,8 @@ RSpec.describe 'profiling integration test' do
         max_frames: 400
       )
     end
-    let(:exporter) do
-      Datadog::Profiling::Exporter.new(
-        Datadog::Profiling::Transport::IO.default(
-          out: out
-        )
-      )
-    end
     let(:transport) { instance_double(Datadog::Profiling::HttpTransport) }
-    let(:scheduler) { Datadog::Profiling::Scheduler.new(recorder: recorder, transport: transport) }
+    let(:scheduler) { Datadog::Profiling::Scheduler.new(recorder: exporter, transport: transport) }
 
     it 'produces a profile' do
       expect(transport).to receive(:export)

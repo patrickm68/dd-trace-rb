@@ -2,13 +2,13 @@
 require 'spec_helper'
 
 require 'datadog/profiling/http_transport'
-require 'datadog/profiling/recorder'
+require 'datadog/profiling/exporter'
 require 'datadog/profiling/scheduler'
 
 RSpec.describe Datadog::Profiling::Scheduler do
-  subject(:scheduler) { described_class.new(recorder: recorder, transport: transport, **options) }
+  subject(:scheduler) { described_class.new(recorder: exporter, transport: transport, **options) }
 
-  let(:recorder) { instance_double(Datadog::Profiling::Recorder) }
+  let(:exporter) { instance_double(Datadog::Profiling::Exporter) }
   let(:transport) { instance_double(Datadog::Profiling::HttpTransport) }
   let(:options) { {} }
 
@@ -89,7 +89,7 @@ RSpec.describe Datadog::Profiling::Scheduler do
     subject(:after_fork) { scheduler.after_fork }
 
     it 'clears the buffer' do
-      expect(recorder).to receive(:flush)
+      expect(exporter).to receive(:flush)
       after_fork
     end
   end
@@ -132,7 +132,7 @@ RSpec.describe Datadog::Profiling::Scheduler do
 
     let(:flush) { instance_double(Datadog::Profiling::Flush) }
 
-    before { expect(recorder).to receive(:flush).and_return(flush) }
+    before { expect(exporter).to receive(:flush).and_return(flush) }
 
     it 'exports the profiling data' do
       expect(transport).to receive(:export).with(flush)
@@ -198,14 +198,14 @@ RSpec.describe Datadog::Profiling::Scheduler do
   describe '#work_pending?' do
     subject(:work_pending?) { scheduler.work_pending? }
 
-    context 'when the recorder has no events' do
-      before { expect(recorder).to receive(:empty?).and_return(true) }
+    context 'when the exporter has no events' do
+      before { expect(exporter).to receive(:empty?).and_return(true) }
 
       it { is_expected.to be false }
     end
 
-    context 'when the recorder has events' do
-      before { expect(recorder).to receive(:empty?).and_return(false) }
+    context 'when the exporter has events' do
+      before { expect(exporter).to receive(:empty?).and_return(false) }
 
       it { is_expected.to be true }
     end
