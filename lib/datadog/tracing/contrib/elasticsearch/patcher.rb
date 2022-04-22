@@ -33,7 +33,7 @@ module Datadog
           # rubocop:disable Metrics/AbcSize
           def patch_elasticsearch_transport_client
             # rubocop:disable Metrics/BlockLength
-            ::Elasticsearch::Transport::Client.class_eval do
+            transport_module::Client.class_eval do
               alias_method :perform_request_without_datadog, :perform_request
               remove_method :perform_request
 
@@ -108,6 +108,16 @@ module Datadog
           end
           # rubocop:enable Metrics/MethodLength
           # rubocop:enable Metrics/AbcSize
+
+          # `Elasticsearch` namespace renamed to `Elastic` in version 8.0.0:
+          # @see https://github.com/elastic/elastic-transport-ruby/commit/ef804cbbd284f2a82d825221f87124f8b5ff823c
+          def transport_module
+            if Integration.version >= Gem::Version.new('8.0.0')
+              ::Elastic::Transport
+            else
+              ::Elasticsearch::Transport
+            end
+          end
         end
       end
     end

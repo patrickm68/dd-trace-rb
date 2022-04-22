@@ -3,7 +3,7 @@
 require 'datadog/tracing/contrib/integration_examples'
 require 'datadog/tracing/contrib/support/spec_helper'
 require 'time'
-require 'elasticsearch-transport'
+require 'elasticsearch'
 require 'faraday'
 
 require 'ddtrace'
@@ -31,6 +31,11 @@ RSpec.describe 'Elasticsearch::Transport::Client tracing' do
     Datadog.configure do |c|
       c.tracing.instrument :elasticsearch, configuration_options
     end
+
+    # Elasticsearch always sends on sanity request to `/` per client
+    # before executing the desired request.
+    # @see https://github.com/elastic/elasticsearch-ruby/blob/ce84322759ff494764bbd096922faff998342197/elasticsearch/lib/elasticsearch.rb#L161
+    stub_request(:get, "#{server}/").to_return(status: 200)
   end
 
   after { Datadog.registry[:elasticsearch].reset_configuration! }

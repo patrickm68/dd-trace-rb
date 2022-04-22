@@ -5,7 +5,8 @@ require 'datadog/tracing/contrib/analytics_examples'
 require 'datadog/tracing/contrib/integration_examples'
 
 require 'ddtrace'
-require 'elasticsearch-transport'
+
+require 'elasticsearch'
 
 RSpec.describe Datadog::Tracing::Contrib::Elasticsearch::Patcher do
   let(:host) { ENV.fetch('TEST_ELASTICSEARCH_HOST', '127.0.0.1') }
