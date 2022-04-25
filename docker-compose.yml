@@ -64,8 +64,8 @@ services:
     tty: true
     volumes:
       - .:/app
-      - bundle-2.2:/usr/local/bundle
       - extension-build-tmp:/app/tmp
+      - bundle-2.2:/usr/local/bundle
       - "ddagent_var_run:${TEST_DDAGENT_VAR_RUN}"
   tracer-2.3:
     image: ivoanjo/docker-library:ddtrace_rb_2_3_8
@@ -288,6 +288,7 @@ services:
     tty: true
     volumes:
       - .:/app
+      - extension-build-tmp:/app/tmp
       - bundle-3.0-arm64:/usr/local/bundle
       - "ddagent_var_run:${TEST_DDAGENT_VAR_RUN}"
   tracer-3.1:
@@ -346,6 +347,7 @@ services:
     tty: true
     volumes:
       - .:/app
+      - extension-build-tmp:/app/tmp
       - bundle-3.1-arm64:/usr/local/bundle
       - "ddagent_var_run:${TEST_DDAGENT_VAR_RUN}"
   tracer-3.2:
@@ -375,6 +377,7 @@ services:
     tty: true
     volumes:
       - .:/app
+      - extension-build-tmp:/app/tmp
       - bundle-3.2:/usr/local/bundle
       - "ddagent_var_run:${TEST_DDAGENT_VAR_RUN}"
   tracer-3.2-arm64:
@@ -403,6 +406,7 @@ services:
     tty: true
     volumes:
       - .:/app
+      - extension-build-tmp:/app/tmp
       - bundle-3.2-arm64:/usr/local/bundle
       - "ddagent_var_run:${TEST_DDAGENT_VAR_RUN}"
   # ADD NEW RUBIES HERE
