@@ -98,8 +98,6 @@ if ruby_version?('2.1')
     gem 'dalli', '< 3.0.0' # Dalli 3.0 dropped support for Ruby < 2.5
     gem 'delayed_job'
     gem 'delayed_job_active_record'
-    gem 'elasticsearch-transport' # Deprecated gem for version < 8.0
-    gem 'elastic-transport' # Gem for version >= 8.0
     gem 'presto-client', '>=  0.5.14'
     gem 'ethon'
     gem 'excon'
@@ -132,6 +130,7 @@ if ruby_version?('2.1')
 
   appraise 'core-old' do
     gem 'dogstatsd-ruby', '~> 4'
+    gem 'elasticsearch-transport' # Deprecated gem for Elasticsearch version < 8.0
   end
 # ----------------------------------------------------------------------------------------------------------------------
 elsif ruby_version?('2.2')
@@ -270,8 +269,6 @@ elsif ruby_version?('2.2')
     gem 'dalli', '< 3.0.0' # Dalli 3.0 dropped support for Ruby < 2.5
     gem 'delayed_job'
     gem 'delayed_job_active_record'
-    gem 'elasticsearch-transport' # Deprecated gem for version < 8.0
-    gem 'elastic-transport' # Gem for version >= 8.0
     gem 'pg'
     gem 'presto-client', '>=  0.5.14'
     gem 'ethon'
@@ -311,6 +308,7 @@ elsif ruby_version?('2.2')
 
   appraise 'core-old' do
     gem 'dogstatsd-ruby', '~> 4'
+    gem 'elasticsearch-transport' # Deprecated gem for Elasticsearch version < 8.0
   end
 # ----------------------------------------------------------------------------------------------------------------------
 elsif ruby_version?('2.3')
@@ -456,8 +454,6 @@ elsif ruby_version?('2.3')
     gem 'dalli', '< 3.0.0' # Dalli 3.0 dropped support for Ruby < 2.5
     gem 'delayed_job'
     gem 'delayed_job_active_record'
-    gem 'elasticsearch-transport' # Deprecated gem for version < 8.0
-    gem 'elastic-transport' # Gem for version >= 8.0
     gem 'ethon'
     gem 'excon'
     gem 'faraday'
@@ -497,6 +493,7 @@ elsif ruby_version?('2.3')
   end
 
   appraise 'contrib-old' do
+    gem 'elasticsearch-transport' # Deprecated gem for Elasticsearch version < 8.0
     gem 'faraday', '0.17'
   end
 
@@ -575,8 +572,6 @@ elsif ruby_version?('2.4')
     gem 'dalli', '< 3.0.0' # Dalli 3.0 dropped support for Ruby < 2.5
     gem 'delayed_job'
     gem 'delayed_job_active_record'
-    gem 'elasticsearch-transport' # Deprecated gem for version < 8.0
-    gem 'elastic-transport' # Gem for version >= 8.0
     gem 'ethon'
     gem 'excon'
     gem 'faraday'
@@ -616,6 +611,7 @@ elsif ruby_version?('2.4')
   end
 
   appraise 'contrib-old' do
+    gem 'elasticsearch-transport' # Deprecated gem for Elasticsearch version < 8.0
     gem 'faraday', '0.17'
   end
 
@@ -812,8 +808,7 @@ elsif ruby_version?('2.5')
     gem 'dalli', '>= 3.0.0'
     gem 'delayed_job'
     gem 'delayed_job_active_record'
-    gem 'elasticsearch-transport' # Deprecated gem for version < 8.0
-    gem 'elastic-transport' # Gem for version >= 8.0
+    gem 'elastic-transport', '>= 8.0.0'
     # Workaround bundle of JRuby/ethon issues:
     # * ethon 0.15.0 is incompatible with most JRuby 9.2 versions (fixed in 9.2.20.0),
     #   see https://github.com/typhoeus/ethon/issues/205
@@ -864,8 +859,9 @@ elsif ruby_version?('2.5')
   end
 
   appraise 'contrib-old' do
-    gem 'faraday', '0.17'
     gem 'dalli', '< 3.0.0'
+    gem 'elasticsearch-transport' # Deprecated gem for Elasticsearch version < 8.0
+    gem 'faraday', '0.17'
   end
 
   appraise 'core-old' do
@@ -1044,9 +1040,8 @@ elsif ruby_version?('2.6')
       gem 'dalli', '>= 3.0.0'
       gem 'delayed_job'
       gem 'delayed_job_active_record'
-      gem 'elasticsearch-transport' # Deprecated gem for version < 8.0
-      gem 'elastic-transport' # Gem for version >= 8.0
-    gem 'ethon'
+      gem 'elastic-transport', '>= 8.0.0'
+      gem 'ethon'
       gem 'excon'
       gem 'faraday'
       gem 'grape'
@@ -1087,8 +1082,9 @@ elsif ruby_version?('2.6')
     end
 
     appraise 'contrib-old' do
-      gem 'faraday', '0.17'
       gem 'dalli', '< 3.0.0'
+      gem 'elasticsearch-transport' # Deprecated gem for Elasticsearch version < 8.0
+      gem 'faraday', '0.17'
     end
 
     appraise 'core-old' do
@@ -1250,9 +1246,8 @@ elsif ruby_version?('2.7')
       gem 'dalli', '>= 3.0.0'
       gem 'delayed_job'
       gem 'delayed_job_active_record'
-      gem 'elasticsearch-transport' # Deprecated gem for version < 8.0
-      gem 'elastic-transport' # Gem for version >= 8.0
-    gem 'ethon'
+      gem 'elastic-transport', '>= 8.0.0'
+      gem 'ethon'
       gem 'excon'
       gem 'grape'
       gem 'graphql', '>= 1.12.0', '< 1.13.0' # Newer versions are broken, needs to be investigated, see https://github.com/DataDog/dd-trace-rb/issues/1866
@@ -1289,8 +1284,9 @@ elsif ruby_version?('2.7')
     end
 
     appraise 'contrib-old' do
-      gem 'faraday', '0.17'
       gem 'dalli', '< 3.0.0'
+      gem 'elasticsearch-transport' # Deprecated gem for Elasticsearch version < 8.
+      gem 'faraday', '0.17'
     end
 
     appraise 'core-old' do
@@ -1364,8 +1360,7 @@ elsif ruby_version?('3.0') || ruby_version?('3.1')
     gem 'dalli', '>= 3.0.0'
     gem 'delayed_job'
     gem 'delayed_job_active_record'
-    gem 'elasticsearch-transport' # Deprecated gem for version < 8.0
-    gem 'elastic-transport' # Gem for version >= 8.0
+    gem 'elastic-transport', '>= 8.0.0'
     gem 'ethon'
     gem 'excon'
     gem 'grape'
@@ -1405,6 +1400,7 @@ elsif ruby_version?('3.0') || ruby_version?('3.1')
 
   appraise 'contrib-old' do
     gem 'dalli', '< 3.0.0'
+    gem 'elasticsearch-transport' # Deprecated gem for Elasticsearch version < 8.
   end
 
   appraise 'core-old' do
@@ -1478,7 +1474,7 @@ elsif ruby_version?('3.2')
     gem 'dalli', '>= 3.0.0'
     gem 'delayed_job'
     gem 'delayed_job_active_record'
-    gem 'elasticsearch-transport'
+    gem 'elastic-transport', '>= 8.0.0'
     gem 'ethon'
     gem 'excon'
     gem 'grape'
@@ -1518,6 +1514,7 @@ elsif ruby_version?('3.2')
 
   appraise 'contrib-old' do
     gem 'dalli', '< 3.0.0'
+    gem 'elasticsearch-transport' # Deprecated gem for Elasticsearch version < 8.
   end
 
   appraise 'core-old' do
