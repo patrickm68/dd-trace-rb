@@ -109,7 +109,7 @@ module Datadog
           # rubocop:enable Metrics/MethodLength
           # rubocop:enable Metrics/AbcSize
 
-          # `Elasticsearch` namespace renamed to `Elastic` in version 8.0.0:
+          # `Elasticsearch` namespace renamed to `Elastic` in version 8.0.0 of the transport gem:
           # @see https://github.com/elastic/elastic-transport-ruby/commit/ef804cbbd284f2a82d825221f87124f8b5ff823c
           def transport_module
             if Integration.version >= Gem::Version.new('8.0.0')
