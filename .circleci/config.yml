@@ -62,7 +62,9 @@ test_containers:
       - MYSQL_USER=mysql
   - &mysql_port 3306
   - &container_elasticsearch
-    image: elasticsearch:2.4
+    image: elasticsearch:7.17.3
+    environment:
+      - discovery.type=single-node # Ensure production cluster requirements are not checked
   - &elasticsearch_port 9200
   - &container_redis
     image: redis:3.0
