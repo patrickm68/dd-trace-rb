@@ -32,10 +32,19 @@ RSpec.describe 'Elasticsearch::Transport::Client tracing' do
       c.tracing.instrument :elasticsearch, configuration_options
     end
 
+    # Mock realistic Elasticsearch verification response
+    stub_request(:get, "#{server}/")
+      .to_return(
+        status: 200,
+        headers: { 'x-elastic-product' => 'Elasticsearch', 'content-type' => 'application/yaml' },
+        body: "version:\n  number: 8.0.0"
+      )
+
     # Elasticsearch always sends on sanity request to `/` per client
     # before executing the desired request.
     # @see https://github.com/elastic/elasticsearch-ruby/blob/ce84322759ff494764bbd096922faff998342197/elasticsearch/lib/elasticsearch.rb#L161
-    stub_request(:get, "#{server}/").to_return(status: 200)
+    client.perform_request('GET', '/')
+    clear_traces!
   end
 
   after { Datadog.registry[:elasticsearch].reset_configuration! }
@@ -141,7 +150,7 @@ RSpec.describe 'Elasticsearch::Transport::Client tracing' do
 
   describe 'client configuration override' do
     context 'when #service is overridden' do
-      before { Datadog.configure_onto(client, service_name: service_name) }
+      before { Datadog.configure_onto(client.transport, service_name: service_name) }
 
       let(:service_name) { 'bar' }
 

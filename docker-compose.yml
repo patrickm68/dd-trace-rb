@@ -544,7 +544,7 @@ services:
     volumes:
       - ddagent_var_run:/var/run/datadog
   elasticsearch:
-    image: elasticsearch:7.17.3
+    image: elasticsearch:8.1.3
     platform: linux/x86_64
     expose:
       - "9200"
@@ -553,7 +553,9 @@ services:
       - "${TEST_ELASTICSEARCH_REST_PORT}:9200"
       - "${TEST_ELASTICSEARCH_NATIVE_PORT}:9300"
     environment:
-      - discovery.type=single-node # Ensure production cluster requirements are not checked
+      # Ensure production cluster requirements are not enforced
+      - discovery.type=single-node
+      - xpack.security.enabled=false
   memcached:
     image: memcached:1.5-alpine
     platform: linux/x86_64
