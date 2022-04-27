@@ -1581,7 +1581,7 @@ DEPENDENCIES
   faraday (>= 1.0)
   google-protobuf (~> 3.11.0)
   grape
-  graphql (>= 1.12.0, < 1.13.0)
+  graphql
   grpc
   hiredis
   http
