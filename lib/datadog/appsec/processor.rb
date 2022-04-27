@@ -42,7 +42,7 @@ module Datadog
         end
       end
 
-      attr_reader :ruleset_info
+      attr_reader :ruleset_info, :addresses
 
       def initialize
         @ruleset = nil
@@ -105,6 +105,7 @@ module Datadog
 
         @handle = Datadog::AppSec::WAF::Handle.new(@ruleset)
         @ruleset_info = @handle.ruleset_info
+        @addresses = @handle.required_addresses
 
         true
       rescue StandardError => e
