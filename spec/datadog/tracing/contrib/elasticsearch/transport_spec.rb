@@ -33,7 +33,7 @@ RSpec.describe 'Elasticsearch::Transport::Client tracing' do
     end
 
     # Mock realistic Elasticsearch verification response
-    stub_request(:get, "#{server}/")
+    stub_request(:get, "#{server}//?")
       .to_return(
         status: 200,
         headers: { 'x-elastic-product' => 'Elasticsearch', 'content-type' => 'application/yaml' },
