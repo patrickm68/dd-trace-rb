@@ -556,6 +556,7 @@ services:
       # Ensure production cluster requirements are not enforced
       - discovery.type=single-node
       - xpack.security.enabled=false
+      - ES_JAVA_OPTS="-Xms750m -Xmx750m"
   memcached:
     image: memcached:1.5-alpine
     platform: linux/x86_64

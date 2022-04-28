@@ -67,6 +67,7 @@ test_containers:
       # Ensure production cluster requirements are not enforced
       - discovery.type=single-node
       - xpack.security.enabled=false
+      - ES_JAVA_OPTS="-Xms750m -Xmx750m"
   - &elasticsearch_port 9200
   - &container_redis
     image: redis:3.0
